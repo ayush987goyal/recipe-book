@@ -1,3 +1,27 @@
 <div class="container">
-  <app-recipe></app-recipe>
+  <div class="row mainHeading">
+    Recipe Book
+  </div>
+  <div class="container main row">
+    <app-recipe></app-recipe>
+  </div>
+  <div class="container row">
+    <button type="button" class="btn btn-primary" (click)="modal.open()">Add Recipe</button>
+  </div>
 </div>
+<modal #modal>
+  <modal-header [show-close]="true">
+    <h4 class="modal-title">Add a Recipe</h4>
+  </modal-header>
+  <modal-body>
+    <div class=" form-group">
+      <label for="name">Recipe name</label>
+      <input type="text" id="name" class="form-control" [(ngModel)]="newRecipeName">
+    </div>
+    <div class="form-group">
+      <label for="ingredients">Ingredients</label>
+      <textarea rows="3" cols="" class="form-control" [(ngModel)]="newIngredientList"></textarea>
+    </div>
+  </modal-body>
+  <modal-footer [show-default-buttons]="true"><button type="button" class="btn btn-success" (click)="onAddRecipe()">Add</button></modal-footer>
+</modal>

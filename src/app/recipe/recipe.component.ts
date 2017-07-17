@@ -13,6 +13,9 @@ export class RecipeComponent implements OnInit {
   isOpen: boolean[] = [];
   openIndex: number = -1;
 
+  newRecipeName: string = '';
+  newIngredientList: string= '';
+
   constructor(private recipesService: RecipesService) { }
 
   ngOnInit() {
@@ -38,6 +41,17 @@ export class RecipeComponent implements OnInit {
       this.isOpen[this.openIndex] = false;
     }
     this.openIndex = index;
+  }
+
+  onEditRecipe(index: number){
+    let ingredients = this.newIngredientList.split(',');
+    let recipe: Recipe = new Recipe(this.newRecipeName, ingredients);
+
+    this.recipesService.updateRecipe(index, recipe);
+  }
+
+  onDeleteRecipe(index: number){
+    this.recipesService.deleteRecipe(index);
   }
 
 }
