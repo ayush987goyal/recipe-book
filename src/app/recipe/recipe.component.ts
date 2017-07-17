@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Recipe } from './recipe.model';
 import { RecipesService } from '../recipes.service';
 
@@ -12,6 +12,9 @@ export class RecipeComponent implements OnInit {
   recipes: Recipe[];
   isOpen: boolean[] = [];
   openIndex: number = -1;
+
+  @ViewChild('newName') newName;
+  @ViewChild('newIng') newIng;
 
   newRecipeName: string = '';
   newIngredientList: string= '';
@@ -44,8 +47,8 @@ export class RecipeComponent implements OnInit {
   }
 
   onEditRecipe(index: number){
-    let ingredients = this.newIngredientList.split(',');
-    let recipe: Recipe = new Recipe(this.newRecipeName, ingredients);
+    let ingredients = this.newIng.nativeElement.value.split(',');
+    let recipe: Recipe = new Recipe(this.newName.nativeElement.value, ingredients);
 
     this.recipesService.updateRecipe(index, recipe);
   }
