@@ -3,4 +3,4 @@ node_js:
   - "6"
 
 script:
-  - ng build --prod
+  - ng build --prod --aot=false
